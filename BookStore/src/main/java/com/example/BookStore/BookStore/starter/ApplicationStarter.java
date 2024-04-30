@@ -23,9 +23,9 @@ public class ApplicationStarter implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Book book = new Book("title","aut","cat","8574234213",new Date(1979,02,03),2500);
         Author author = new Author("Author A.R","It's a good autoBio");
         Category category = new Category("Category","This is category");
+        Book book = new Book("title",author,category,"8574234213",new Date(1979,02,03),2500);
 
         bookService.save(book);
         authorService.save(author);
