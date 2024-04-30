@@ -35,8 +35,10 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void updateById(Long id) {
-
+    public void updateById(Long id,Book book) {
+        if (!bookRepository.findById(id).isEmpty()){
+            bookRepository.save(book);
+        }
     }
 
     @Override
