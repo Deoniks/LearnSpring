@@ -14,12 +14,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 @RestController
 @RequestMapping("/book")
-@Primary
-public class BookController implements BookService {
+public class BookController {
     @Autowired
     private final BookRepository bookRepository;
 
@@ -31,17 +31,27 @@ public class BookController implements BookService {
         this.bookRepository = bookRepository;
     }
 
-    @Override
+
     @GetMapping("/findAll")
     public List<Book> getAll() {
         log.info("Find all book");
         return bookRepository.findAll();
     }
 
-    @Override
     @PostMapping("/save")
     public void save(@RequestBody Book book) {
         Long idAuthor = book.getAuthor().getId();
+        if(book.getAuthor().getId()!=null){
+            List<Author>authors = new ArrayList<>();
+            for(int i=0;i>bookRepository.findAll().size();i++){
+                authors.add(bookRepository.findAll().get(i).getAuthor());
+            }
+            for(Author aut:authors){
+                if(book.getAuthor().getId()==aut.getId()){
+                    log.info("check");
+                }
+            }
+        }
         log.info("author:{}",idAuthor);
         bookRepository.save(book);
         log.info("Save book:{}",bookRepository.findById(book.getId()));
@@ -69,21 +79,27 @@ public class BookController implements BookService {
         * */
     }
 
-    @Override
+    @PutMapping("/updateBy/{id}")
+    public void update(@RequestBody Book book,@PathVariable Long id){
+        List<Book>books = bookRepository.findAll();
+        if(!bookRepository.findById(id).isEmpty()){
+            bookRepository.save(book);
+            log.info("Update book: {}",bookRepository.findById(id));
+        }else log.info("Not find book");
+    }
+
     @DeleteMapping("/delete")
     public void delete(@RequestBody Book book) {
         log.info("Delete book",book);
         bookRepository.delete(book);
     }
 
-    @Override
     @DeleteMapping("/deleteBy/{id}")
     public void deleteById(@PathVariable Long id) {
         log.info("Delete book: {}",bookRepository.findById(id));
         bookRepository.deleteById(id);
     }
 
-    @Override
     @GetMapping("/findBy/{id}")
     public Book getById(@PathVariable Long id) {
         log.info("find book: {}",bookRepository.findById(id));

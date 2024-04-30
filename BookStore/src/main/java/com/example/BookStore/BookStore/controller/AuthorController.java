@@ -14,8 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/author")
-@Primary
-public class AuthorController implements AuthorService {
+public class AuthorController{
     private Logger log = LoggerFactory.getLogger(AuthorController.class);
     @Autowired
     private final AuthorRepository authorRepository;
@@ -26,34 +25,29 @@ public class AuthorController implements AuthorService {
         this.authorRepository = authorRepository;
     }
 
-    @Override
     @GetMapping("/findAll")
     public List<Author> getAll() {
         log.info("Author All: {}");
         return authorRepository.findAll();
     }
 
-    @Override
     @PostMapping("/save")
     public void save(@RequestBody Author author) {
         authorRepository.save(author);
         log.info("Save: {}",authorRepository.findById(author.getId()));
     }
 
-    @Override
     @DeleteMapping("/delete")
     public void delete(Author author) {
         authorRepository.delete(author);
     }
 
-    @Override
     @DeleteMapping("/deleteBy/{id}")
     public void deleteById(@PathVariable Long id) {
         log.info("Delete:",authorRepository.findById(id));
         authorRepository.deleteById(id);
     }
 
-    @Override
     @GetMapping("/findBy/{id}")
     public Author getById(@PathVariable Long id) {
         log.info("Find by: {}",authorRepository.findById(id));
