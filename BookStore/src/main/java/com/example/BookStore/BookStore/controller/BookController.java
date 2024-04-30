@@ -80,7 +80,7 @@ public class BookController {
     }
 
     @PutMapping("/updateBy/{id}")
-    public void update(@RequestBody Book book,@PathVariable Long id){
+    public void update(@PathVariable Long id,@RequestBody Book book){
         List<Book>books = bookRepository.findAll();
         if(!bookRepository.findById(id).isEmpty()){
             bookRepository.save(book);
