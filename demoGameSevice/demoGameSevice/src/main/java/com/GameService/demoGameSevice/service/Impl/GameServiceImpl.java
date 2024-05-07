@@ -1,6 +1,7 @@
 package com.GameService.demoGameSevice.service.Impl;
 
 import com.GameService.demoGameSevice.domain.game.Game;
+import com.GameService.demoGameSevice.domain.user.Gamer;
 import com.GameService.demoGameSevice.repository.game.GameRepository;
 import com.GameService.demoGameSevice.service.game.GameService;
 import org.slf4j.Logger;
@@ -43,6 +44,8 @@ public class GameServiceImpl implements GameService {
         log.info("Delete game: {}",gameRepository.findById(game.getId()));
         gameRepository.delete(game);
     }
+
+
 
     @Override
     public Game getById(Long id) {

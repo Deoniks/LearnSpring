@@ -9,5 +9,6 @@ public interface GameService {
     void save(Game game);
     void update(Long id,Game game);
     void delete(Game game);
+
     Game getById(Long id);
 }

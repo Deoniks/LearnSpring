@@ -12,7 +12,6 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Table(name = "GAMER")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Gamer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,9 +20,9 @@ public class Gamer {
     private String name;
     private int age;
 
-    @OneToMany(mappedBy = "game",cascade = CascadeType.ALL)
-    //@JoinColumn(name = "game_id")
-    private List<Game>games;
+    @OneToMany(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
+    @JoinColumn(name = "game_id",referencedColumnName = "id")
+    private List<Game> games;
 
     public Gamer(String login, String name, int age) {
         this.login = login;
