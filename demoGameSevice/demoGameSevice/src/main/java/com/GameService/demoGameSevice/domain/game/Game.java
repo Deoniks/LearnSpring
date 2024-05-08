@@ -17,12 +17,14 @@ public class Game {
     private Long id;
     private String name;
     private int ageLimite;
-    @OneToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
+
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     @JoinColumn(name = "genre_id",referencedColumnName = "id")
     private Genre genre;
-    /*@ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
-    @JoinColumn(name = "gamer_id",referencedColumnName = "id")
-    private Gamer gamer;*/
+
+    /*@OneToMany(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
+    @JoinColumn(name = "game_id",referencedColumnName = "id")
+    private List<Gamer> gamers;*/
 
     public Game(String name, int ageLimite, Genre genre) {
         this.name = name;
@@ -37,5 +39,22 @@ public class Game {
         this.genre = genre;
     }
 
+    /*public Game(String name, int ageLimite, Genre genre, List<Gamer> gamers) {
+        this.name = name;
+        this.ageLimite = ageLimite;
+        this.genre = genre;
+        this.gamers = gamers;
+    }
 
+    public Game(Long id, String name, int ageLimite, Genre genre, List<Gamer> gamers) {
+        this.id = id;
+        this.name = name;
+        this.ageLimite = ageLimite;
+        this.genre = genre;
+        this.gamers = gamers;
+    }
+
+    public void addGame(Gamer gamer){
+        this.gamers.add(gamer);
+    }*/
 }

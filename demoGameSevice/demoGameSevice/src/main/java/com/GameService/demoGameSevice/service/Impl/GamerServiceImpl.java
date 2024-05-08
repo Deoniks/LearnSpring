@@ -45,11 +45,11 @@ public class GamerServiceImpl implements GamerService {
         gamerRepository.delete(gamer);
     }
 
-    @Override
+    /*@Override
     public void buyGame(Long id,Gamer gamer) {
         gamer.addGame(gameRepository.findById(id).orElse(null));
         log.info("buy game: {}",gamerRepository.findById(gamer.getId()));
-    }
+    }*/
 
     @Override
     public Gamer getById(Long id) {

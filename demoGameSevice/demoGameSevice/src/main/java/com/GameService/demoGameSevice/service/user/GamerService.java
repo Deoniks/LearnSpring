@@ -9,6 +9,6 @@ public interface GamerService {
     void save(Gamer gamer);
     void update(Long id,Gamer gamer);
     void delete(Gamer gamer);
-    void buyGame(Long id,Gamer gamer);
+    //void buyGame(Long id,Gamer gamer);
     Gamer getById(Long id);
 }

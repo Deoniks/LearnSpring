@@ -28,7 +28,7 @@ public class Gamer {
         this.login = login;
         this.name = name;
         this.age = age;
-        this.games = new ArrayList<>();
+        //this.games = new ArrayList<>();
     }
 
     public Gamer(String login, String name, int age, List<Game> games) {
@@ -46,7 +46,7 @@ public class Gamer {
         this.games = games;
     }
 
-    public void addGame(Game game){
+    /*public void addGame(Game game){
         games.add(game);
-    }
+    }*/
 }

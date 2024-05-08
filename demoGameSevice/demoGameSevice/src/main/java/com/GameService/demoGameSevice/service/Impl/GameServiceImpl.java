@@ -3,6 +3,7 @@ package com.GameService.demoGameSevice.service.Impl;
 import com.GameService.demoGameSevice.domain.game.Game;
 import com.GameService.demoGameSevice.domain.user.Gamer;
 import com.GameService.demoGameSevice.repository.game.GameRepository;
+import com.GameService.demoGameSevice.repository.user.GamerRepository;
 import com.GameService.demoGameSevice.service.game.GameService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GameServiceImpl implements GameService {
@@ -18,6 +20,8 @@ public class GameServiceImpl implements GameService {
 
     @Autowired
     private GameRepository gameRepository;
+    @Autowired
+    private GamerRepository gamerRepository;
 
     @Override
     public List<Game> getAll() {
@@ -45,6 +49,32 @@ public class GameServiceImpl implements GameService {
         gameRepository.delete(game);
     }
 
+    @Override
+    public void buyGame(Long id, Gamer gamer) {
+        /*Game g = gameRepository.findById(id).orElse(null);
+        if(g!=null){
+            if(g.getGamers().isEmpty()){
+                g.addGame(gamer);
+                gameRepository.save(g);
+                log.info("Buy game : {}",gameRepository.findById(id));
+            }else {
+                boolean check = false;
+                for (int i = 0; i < g.getGamers().size(); i++) {
+                    if (g.getGamers().get(i).getId() == gamer.getId()) {
+                        check = true;
+                        break;
+                    }
+                }
+                if(check == true){
+                    log.info("This user is buy game");
+                }else {
+                    g.addGame(gamer);
+                    gameRepository.save(g);
+                    log.info("Buy game : {}", gameRepository.findById(id));
+                }
+            }
+        }*/
+    }
 
 
     @Override
